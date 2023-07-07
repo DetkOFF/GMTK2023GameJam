@@ -11,11 +11,27 @@ public class GameTile : MonoBehaviour
     private int _distance;
     public bool HasPath => _distance != int.MaxValue;
     public bool IsAlternative { get; set; }
-    
-    private Quaternion _northRotation = Quaternion.Euler(0,0,0);
-    private Quaternion _eastRotation = Quaternion.Euler(0,0,270);
-    private Quaternion _southRotation = Quaternion.Euler(0,0,180);
-    private Quaternion _westRotation = Quaternion.Euler(0,0,90);
+
+    private Quaternion _northRotation = Quaternion.Euler(0, 0, 0);
+    private Quaternion _eastRotation = Quaternion.Euler(0, 0, 270);
+    private Quaternion _southRotation = Quaternion.Euler(0, 0, 180);
+    private Quaternion _westRotation = Quaternion.Euler(0, 0, 90);
+
+    public GameTileContent _content;
+
+    public GameTileContent Content
+    {
+        get => _content;
+        set
+        {
+            if(_content != null)
+            {
+                _content.Recycle();
+            }
+            _content = value;
+            _content.transform.localPosition = transform.localPosition;
+        }
+    }
     
     public static void MakeEastWestNeighbors(GameTile east, GameTile west)
     {
