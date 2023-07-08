@@ -19,7 +19,7 @@ public class Game : MonoBehaviour
     [SerializeField, Range(0.1f, 10f)]
     private float _spawnSpeed;
 
-    private float _spawnProgress;
+    private float _spawnProgress = 0;
 
     private  EnemyCollection _enemyCollection = new EnemyCollection();
     private Ray TouchRay => _camera.ScreenPointToRay(Input.mousePosition);
@@ -38,11 +38,12 @@ public class Game : MonoBehaviour
         {
             HandleAlternativeTouch();
         }
-        _spawnProgress = _spawnSpeed * Time.deltaTime;
+        _spawnProgress += _spawnSpeed * 0.1f * Time.deltaTime;
         while(_spawnProgress >= 1f)
         {
             _spawnProgress -= 1f;
             SpawnEnemy();
+            Debug.Log("spawn");
         }
         _enemyCollection.GameUpdate();  
     }

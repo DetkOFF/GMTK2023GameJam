@@ -14,7 +14,9 @@ public class Enemy : MonoBehaviour
 
     public void SpawnOn(GameTile tile)
     {
+        
         transform.localPosition = tile.transform.localPosition;
+        Debug.Log(transform.localPosition);
         _tileFrom = tile;
         _tileTo = tile.NextTileOnPath;
         _positionFrom = _tileFrom.transform.localPosition;
@@ -38,7 +40,11 @@ public class Enemy : MonoBehaviour
             _positionTo = _tileTo.transform.localPosition;
             _progress -= 1f;
         }
-        transform.localPosition += Vector3.LerpUnclamped(_positionFrom, _positionTo, _progress);
+        //transform.localPosition += Vector3.LerpUnclamped(_positionFrom, _positionTo, _progress);
+        
+        Vector3 direction = _tileTo.transform.localPosition - transform.position;
+        transform.Translate(direction.normalized*Time.deltaTime); //*speed
+        
         Debug.Log("Tile from: " + _tileFrom);
         Debug.Log("Tile to: " + _tileTo);
         Debug.Log("Position from: " + _positionFrom);
