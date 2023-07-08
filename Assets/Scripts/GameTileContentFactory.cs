@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 
 [CreateAssetMenu]
-public class GameTileContentFactory : ScriptableObject
+public class GameTileContentFactory : GameObjectFactory
 {
     [SerializeField]
     private GameTileContent _destinationPrefab;
@@ -38,31 +38,9 @@ public class GameTileContentFactory : ScriptableObject
 
     private GameTileContent Get(GameTileContent prefab)
     {
-        GameTileContent instance = Instantiate(prefab);
+        GameTileContent instance = CreateGameObjectInstance(prefab);
         instance.OriginFactory = this;
-        MoveToFactoryScene(instance.gameObject);
         return instance;
     }
 
-    private Scene _contextScene;
-
-    private void MoveToFactoryScene(GameObject o)
-    {
-        if(!_contextScene.isLoaded)
-        {
-            if(Application.isEditor)
-            {
-                _contextScene = SceneManager.GetSceneByName(name);
-                if(!_contextScene.isLoaded)
-                {
-                    _contextScene = SceneManager.CreateScene(name);
-                }
-            }
-            else
-            {
-                _contextScene = SceneManager.CreateScene(name);
-            }
-        }
-        SceneManager.MoveGameObjectToScene(o, _contextScene);
-    }
 }
