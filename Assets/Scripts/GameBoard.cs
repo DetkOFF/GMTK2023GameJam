@@ -133,7 +133,9 @@ public class GameBoard : MonoBehaviour
 
     public void ToggleWall(GameTile tile)
     {
-        if (tile.Content == _contentFactory.Get(GameTileContentType.Wall))
+        Debug.Log("toggleWall");
+        //if (tile.Content == _contentFactory.Get(GameTileContentType.Wall))
+        if (tile.Content.Type == GameTileContentType.Wall)
         {
             tile.Content = _contentFactory.Get(GameTileContentType.Empty);
             FindPaths();
