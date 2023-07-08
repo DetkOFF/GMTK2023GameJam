@@ -88,15 +88,15 @@ public class GameBoard : MonoBehaviour
 
     public GameTile GetTile(Ray ray)
     {
-        RaycastHit2D hit = Physics2D.GetRayIntersection(ray);
+        RaycastHit hit;
         Debug.DrawRay(ray.origin,ray.direction);
-        if(hit != false)
+        if(Physics.Raycast(ray, out hit))
         {
-            int x = (int)(hit.point.x + _size.x * 0.5f); // x is correct
-            int y = (int)(hit.point.y + _size.y * 0.5f); // y is not TODO::needs fixing
-            if (x >= 0 && x <= _size.x && y >= 0 && y <= _size.y)
+            int x = (int)(hit.point.x + _size.x * 0.5f);
+            int y = (int)(-hit.point.y + _size.y * 0.5f);
+            if(x >= 0 && x < _size.x && y >= 0 && y < _size.y)
             {
-                return _tiles[x * y];
+                return _tiles[(y * _size.x)+x];
             }
         }
         return null; 
