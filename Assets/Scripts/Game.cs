@@ -29,13 +29,23 @@ public class Game : MonoBehaviour
         {
             HandleAlternativeTouch();
         }
+        
+        //enemies.GameUpdate();
+        _board.GameUpdate();
     }
     private void HandleTouch()
     {
         GameTile tile = _board.GetTile(TouchRay);
         if (tile != null)
         {
-            _board.ToggleWall(tile);
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                _board.ToggleTower(tile);
+            }
+            else
+            {
+                _board.ToggleWall(tile);
+            }
         }
     }
     private void HandleAlternativeTouch()
