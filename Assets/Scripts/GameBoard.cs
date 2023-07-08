@@ -141,7 +141,11 @@ public class GameBoard : MonoBehaviour
         else if(tile.Content.Type == GameTileContentType.Empty)
         {
             tile.Content = _contentFactory.Get(GameTileContentType.Wall);
-            FindPaths();
+            if(!FindPaths())
+            {
+                tile.Content = _contentFactory.Get(GameTileContentType.Empty);
+                FindPaths();
+            }
         }
     }
 
