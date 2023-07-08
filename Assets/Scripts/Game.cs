@@ -17,7 +17,7 @@ public class Game : MonoBehaviour
 
     private void Start()
     {
-        _board.Initialize(_boardSize);
+        _board.Initialize(_boardSize,_contentFactory);
     }
     private void Update()
     {
@@ -25,14 +25,25 @@ public class Game : MonoBehaviour
         {
             HandleTouch();
         }
+        else if(Input.GetMouseButtonDown(1))
+        {
+            HandleAlternativeTouch();
+        }
     }
     private void HandleTouch()
     {
         GameTile tile = _board.GetTile(TouchRay);
         if (tile != null)
         {
-            tile.Content = _contentFactory.Get(GameTileContentType.Destination);
+            _board.ToggleWall(tile);
         }
-
+    }
+    private void HandleAlternativeTouch()
+    {
+        GameTile tile = _board.GetTile(TouchRay);
+        if (tile != null)
+        {
+            _board.ToggleDestination(tile);
+        }
     }
 }
