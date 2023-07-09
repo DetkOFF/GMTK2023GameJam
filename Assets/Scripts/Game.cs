@@ -49,14 +49,15 @@ public class Game : MonoBehaviour
             enemy.SpawnOn(spawnPoint);
             _enemyCollection.Add(enemy);
         }
-        
+        //enemies.GameUpdate();
+        //_board.GameUpdate();
     }
     private void HandleTouch()
     {
         GameTile tile = _board.GetTile(TouchRay);
         if (tile != null)
         {
-            if(Input.GetKey(KeyCode.LeftShift))
+            if (Input.GetKey(KeyCode.LeftShift))
             {
                 _board.ToggleWall(tile);
             }
