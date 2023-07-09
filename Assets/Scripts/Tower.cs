@@ -40,7 +40,7 @@ public class Tower : GameTileContent
 
     private void Shoot()
     {
-        if (readyToShoot && (Vector2.Distance(transform.position, _target.Position) < (_targetingRange + _target.ColliederSize)))
+        if (readyToShoot && (Vector2.Distance(transform.position, _target.Position) < (_targetingRange)))
         {
             readyToShoot = false;
             StartCoroutine(ShootingCoolDownCoroutine());
@@ -80,7 +80,7 @@ public class Tower : GameTileContent
             foreach (var trgt in targets)
             {
                 _target = trgt.GetComponent<TargetPoint>();
-                if(!TargetBehindWall() || (Vector2.Distance(transform.position, trgt.transform.position) > _targetingRange + _target.ColliederSize))
+                if(!TargetBehindWall() || (Vector2.Distance(transform.position, trgt.transform.position) > _targetingRange))
                     break;
             }
 
