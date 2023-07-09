@@ -14,7 +14,7 @@ public class Tower : GameTileContent
     
     private TargetPoint _target;
     private const int ENEMY_LAYER_MASK = 1 << 9;
-
+    private const int WALL_LAYER_MASK = 1 << 10;
     private void Awake()
     {
         _targetingZone.SetActive(false);
@@ -74,12 +74,31 @@ public class Tower : GameTileContent
         Collider2D[] targets = Physics2D.OverlapCircleAll(transform.localPosition, _targetingRange, ENEMY_LAYER_MASK);
         if (targets.Length > 0)
         {
-            _target = targets[0].GetComponent<TargetPoint>();
+            foreach (var trgt in targets)
+            {
+                _target = trgt.GetComponent<TargetPoint>();
+                if(!TargetBehindWall())
+                    break;
+            }
+
+            if(TargetBehindWall())
+                return false;
+            //_target = targets[0].GetComponent<TargetPoint>();
             return true;
         }
 
         _target = null;
         return false;
+    }
+
+    private bool TargetBehindWall()
+    {
+       // Collider2D[] targets = Physics2D.OverlapCircleAll(transform.localPosition, _targetingRange, ENEMY_LAYER_MASK);
+       Vector2 direction = _target.Position-transform.position;
+       RaycastHit2D[] walls = Physics2D.RaycastAll(transform.position, direction, direction.magnitude,WALL_LAYER_MASK);
+       if (walls.Length > 0)
+           return true;
+       return false;
     }
 
     private bool isTargetTracked()
@@ -91,7 +110,7 @@ public class Tower : GameTileContent
 
         Vector2 myPos = transform.localPosition;
         Vector2 targetPos = _target.Position;
-        if (Vector2.Distance(myPos, targetPos) > _targetingRange + _target.ColliederSize)
+        if (Vector2.Distance(myPos, targetPos) > _targetingRange + _target.ColliederSize || TargetBehindWall())
         {
             _target = null;
             return false;
