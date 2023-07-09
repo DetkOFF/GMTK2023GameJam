@@ -12,4 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a5b1de5fd876d84fa6c15a3bc2195de, type: 3}
   m_Name: EnemyFactory
   m_EditorClassIdentifier: 
-  _prefab: {fileID: 3291968144991762827, guid: 53bcecf6924c6d44ca66df9bba815cc5, type: 3}
+  _strong:
+    _prefab: {fileID: 3291968144991762827, guid: ce1e30d36f8b2d2439614ed5c4fcdce3, type: 3}
+    _speed: 3
+    _health: 16
+    _price: 150
+  _standard:
+    _prefab: {fileID: 3291968144991762827, guid: 53bcecf6924c6d44ca66df9bba815cc5, type: 3}
+    _speed: 5
+    _health: 10
+    _price: 100
+  _speedy:
+    _prefab: {fileID: 3291968144991762827, guid: b20c1c924fcebe44283ff4a43ac1a4b0, type: 3}
+    _speed: 7
+    _health: 3
+    _price: 180

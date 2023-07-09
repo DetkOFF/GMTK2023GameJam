@@ -49,8 +49,8 @@ public class GameBoard : MonoBehaviour
                 tile.Content = _contentFactory.Get(GameTileContentType.Empty);
             }
         }
-        ToggleDestination(_tiles[_tiles.Length / 2]);
-        ToggleSpawnPoint(_tiles[0]);
+        //ToggleDestination(_tiles[_tiles.Length / 2]);
+        //ToggleSpawnPoint(_tiles[0]);
     }
 
     public void GameUpdate()
@@ -81,9 +81,9 @@ public class GameBoard : MonoBehaviour
             return false;
         }
 
-        int destinationIndex = _tiles.Length / 2;
-        _tiles[destinationIndex].BecomeDestination();
-        _searchFrontier.Enqueue(_tiles[destinationIndex]);
+        //int destinationIndex = _tiles.Length / 2;
+        //_tiles[destinationIndex].BecomeDestination();
+        //_searchFrontier.Enqueue(_tiles[destinationIndex]);
 
         while (_searchFrontier.Count > 0)
         {
@@ -139,7 +139,7 @@ public class GameBoard : MonoBehaviour
             tile.Content = _contentFactory.Get(GameTileContentType.Destination);
             FindPaths();
         }
-
+        FindPaths();
     }
     public void ToggleSpawnPoint(GameTile tile)
     {
