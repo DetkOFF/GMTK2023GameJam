@@ -13,6 +13,11 @@ public class Enemy : MonoBehaviour
     private float _progress;
     private float _health;
     private float _speed;
+<<<<<<< Updated upstream
+=======
+    private float _price;
+    public bool _passed { get; private set; } = false;
+>>>>>>> Stashed changes
 
     public void Initialize(float health, float speed)
     {
@@ -51,6 +56,10 @@ public class Enemy : MonoBehaviour
             _tileTo = _tileTo.NextTileOnPath;
             if(_tileTo == null)
             {
+<<<<<<< Updated upstream
+=======
+                _passed = true;
+>>>>>>> Stashed changes
                 OriginFactory.Reclaim(this);
                 return false;
             }

@@ -39,7 +39,12 @@ public class Game : MonoBehaviour
             HandleAlternativeTouch();
         }
         _enemyCollection.GameUpdate();  
+<<<<<<< Updated upstream
         _board.GameUpdate();
+=======
+        
+        _cashManager.ShowBalance();
+>>>>>>> Stashed changes
     }
     private void SpawnEnemy()
     {
