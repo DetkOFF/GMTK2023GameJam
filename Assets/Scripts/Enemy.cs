@@ -13,8 +13,13 @@ public class Enemy : MonoBehaviour
     private float _progress;
     private float _health;
     private float _speed;
+
     private float _price;
     public Action OnEnemyPassed;
+
+    public bool _passed { get; private set; } = false;
+
+
 
     public void Initialize(float health, float speed, float price)
     {
@@ -54,7 +59,9 @@ public class Enemy : MonoBehaviour
             _tileTo = _tileTo.NextTileOnPath;
             if(_tileTo == null)
             {
+
                 OnEnemyPassed?.Invoke();
+                _passed = true;
                 OriginFactory.Reclaim(this);
                 return false;
             }

@@ -52,11 +52,16 @@ public class Game : MonoBehaviour
         {
             HandleAlternativeTouch();
         }
+
         _enemyCollection.GameUpdate();
         _board.GameUpdate();
 
         //_cashManager.ShowBalance();
 
+
+        _enemyCollection.GameUpdate();  
+        _board.GameUpdate();
+        //_cashManager.ShowBalance();
     }
     private void SpawnEnemy()
     {
