@@ -14,6 +14,7 @@ public class GameBoard : MonoBehaviour
 
     private Queue<GameTile> _searchFrontier = new Queue<GameTile>();
 
+    private List<GameTile> _spawnPoints = new List<GameTile>();
     private List<GameTileContent> _contentToUpdate = new List<GameTileContent>();
     public void Initialize(Vector2Int size, GameTileContentFactory contentFactory)
     {
