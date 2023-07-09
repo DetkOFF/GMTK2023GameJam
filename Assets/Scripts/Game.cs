@@ -39,6 +39,7 @@ public class Game : MonoBehaviour
             HandleAlternativeTouch();
         }
         _enemyCollection.GameUpdate();  
+        _board.GameUpdate();
     }
     private void SpawnEnemy()
     {
@@ -60,6 +61,10 @@ public class Game : MonoBehaviour
             if (Input.GetKey(KeyCode.LeftShift))
             {
                 _board.ToggleWall(tile);
+            }
+            else if (Input.GetKey(KeyCode.LeftControl))
+            {
+                _board.ToggleTower(tile);
             }
             else
             {

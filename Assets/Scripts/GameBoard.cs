@@ -49,8 +49,8 @@ public class GameBoard : MonoBehaviour
                 tile.Content = _contentFactory.Get(GameTileContentType.Empty);
             }
         }
-        ToggleDestination(_tiles[_tiles.Length / 2]);
-        ToggleSpawnPoint(_tiles[0]);
+        //ToggleDestination(_tiles[_tiles.Length / 2]);
+        //ToggleSpawnPoint(_tiles[0]);
     }
 
     public void GameUpdate()
@@ -63,6 +63,7 @@ public class GameBoard : MonoBehaviour
 
     public bool FindPaths()
     {
+        //Debug.Log("pathfinding");
         foreach (var tile in _tiles)
         {
             if(tile.Content.Type == GameTileContentType.Destination)
@@ -81,9 +82,9 @@ public class GameBoard : MonoBehaviour
             return false;
         }
 
-        int destinationIndex = _tiles.Length / 2;
-        _tiles[destinationIndex].BecomeDestination();
-        _searchFrontier.Enqueue(_tiles[destinationIndex]);
+        //int destinationIndex = _tiles.Length / 2;
+        //_tiles[destinationIndex].BecomeDestination();
+        //_searchFrontier.Enqueue(_tiles[destinationIndex]);
 
         while (_searchFrontier.Count > 0)
         {
@@ -143,12 +144,12 @@ public class GameBoard : MonoBehaviour
     }
     public void ToggleSpawnPoint(GameTile tile)
     {
-        if(tile.Content.Type == GameTileContentType .SpawnPoint)
+        if(tile.Content.Type == GameTileContentType.SpawnPoint)
         {
             if(_spawnPoints.Count > 1)
             {
                 _spawnPoints.Remove(tile);
-                tile.Content = _contentFactory.Get(GameTileContentType.SpawnPoint);
+                tile.Content = _contentFactory.Get(GameTileContentType.Empty);
             }
         }
         else if(tile.Content.Type == GameTileContentType.Empty)
@@ -160,7 +161,7 @@ public class GameBoard : MonoBehaviour
 
     public void ToggleWall(GameTile tile)
     {
-        Debug.Log("toggleWall");
+        //Debug.Log("toggleWall");
         //if (tile.Content == _contentFactory.Get(GameTileContentType.Wall))
         if (tile.Content.Type == GameTileContentType.Wall)
         {
