@@ -10,11 +10,16 @@ public class EnemyFactory : GameObjectFactory
 {
     [SerializeField]
     private Enemy _prefab;
+    [SerializeField]
+    private float _health;
+    [SerializeField]
+    private float _speed;
 
     public Enemy Get()
     {
         Enemy instance = CreateGameObjectInstance(_prefab);
         instance.OriginFactory = this;
+        instance.Initialize(_health, _speed);
         return instance;
     }
 

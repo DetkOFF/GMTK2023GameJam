@@ -22,5 +22,6 @@ public enum GameTileContentType
     Empty,
     Destination,
     SpawnPoint,
-    Wall
+    Wall,
+    Enemy
 }

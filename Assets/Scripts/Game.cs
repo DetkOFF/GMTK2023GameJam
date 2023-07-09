@@ -38,28 +38,32 @@ public class Game : MonoBehaviour
         {
             HandleAlternativeTouch();
         }
-        _spawnProgress += _spawnSpeed * 0.1f * Time.deltaTime;
-        while(_spawnProgress >= 1f)
-        {
-            _spawnProgress -= 1f;
-            SpawnEnemy();
-            Debug.Log("spawn");
-        }
         _enemyCollection.GameUpdate();  
     }
     private void SpawnEnemy()
     {
-        GameTile spawnPoint = _board.GetSpawnPoint(Random.Range(0, _board.SpawnPointCount));
-        Enemy enemy = _enemyFactory.Get();
-        enemy.SpawnOn(spawnPoint);
-        _enemyCollection.Add(enemy);
+        GameTile spawnPoint = _board.GetTile(TouchRay);
+        if(spawnPoint.Content.Type == GameTileContentType.SpawnPoint)
+        {
+            Enemy enemy = _enemyFactory.Get();
+            enemy.SpawnOn(spawnPoint);
+            _enemyCollection.Add(enemy);
+        }
+        
     }
     private void HandleTouch()
     {
         GameTile tile = _board.GetTile(TouchRay);
         if (tile != null)
         {
-            _board.ToggleWall(tile);
+            if(Input.GetKey(KeyCode.LeftShift))
+            {
+                _board.ToggleWall(tile);
+            }
+            else
+            {
+                SpawnEnemy();
+            }
         }
     }
     private void HandleAlternativeTouch()
@@ -77,4 +81,6 @@ public class Game : MonoBehaviour
             }
         }
     }
+    
+    
 }

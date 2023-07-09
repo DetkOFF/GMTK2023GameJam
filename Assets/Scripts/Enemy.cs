@@ -11,6 +11,19 @@ public class Enemy : MonoBehaviour
     private GameTile _tileFrom, _tileTo;
     private Vector3 _positionFrom, _positionTo;
     private float _progress;
+    private float _health;
+    private float _speed;
+
+    public void Initialize(float health, float speed)
+    {
+        _health = health;
+        _speed = speed;
+    }
+    public void ApplyDamage(float damage)
+    {
+        Debug.Assert(damage >= 0f, "Negative damage applied.");
+        _health -= damage;
+    }
 
     public void SpawnOn(GameTile tile)
     {
@@ -26,7 +39,12 @@ public class Enemy : MonoBehaviour
 
     public bool GameUpdate()
     {
-        _progress += Time.deltaTime;
+        if(_health <= 0f)
+        {
+            OriginFactory.Reclaim(this);
+            return false;
+        }
+        _progress += Time.deltaTime * _speed;
         while(_progress >=  1)
         {
             _tileFrom = _tileTo;
@@ -40,10 +58,10 @@ public class Enemy : MonoBehaviour
             _positionTo = _tileTo.ExitPoint;
             _progress -= 1f;
         }
-        //transform.localPosition += Vector3.LerpUnclamped(_positionFrom, _positionTo, _progress);
+        transform.localPosition = Vector3.LerpUnclamped(_positionFrom, _positionTo, _progress);
         
-        Vector3 direction = _tileTo.ExitPoint - transform.position;
-        transform.Translate(direction.normalized*Time.deltaTime); //*speed
+        //Vector3 direction = _tileTo.ExitPoint - transform.position;
+        //transform.Translate(direction.normalized*Time.deltaTime*_speed); //*speed
         
         Debug.Log("Tile from: " + _tileFrom);
         Debug.Log("Tile to: " + _tileTo);
