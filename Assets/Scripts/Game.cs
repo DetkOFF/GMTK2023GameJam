@@ -24,9 +24,19 @@ public class Game : MonoBehaviour
     private  EnemyCollection _enemyCollection = new EnemyCollection();
     private Ray TouchRay => _camera.ScreenPointToRay(Input.mousePosition);
 
+
+    public bool LoadLevel = false; 
     private void Start()
     {
-        _board.Initialize(_boardSize,_contentFactory);
+        if (LoadLevel)
+        {
+            _board.LoadLevel(_boardSize,_contentFactory);
+        }
+        else
+        {
+            _board.Initialize(_boardSize,_contentFactory);
+        }
+            
     }
     private void Update()
     {
@@ -44,8 +54,11 @@ public class Game : MonoBehaviour
     private void SpawnEnemy()
     {
         GameTile spawnPoint = _board.GetTile(TouchRay);
-        if(spawnPoint.Content.Type == GameTileContentType.SpawnPoint)
+        //Debug.Log(spawnPoint);
+        //if(spawnPoint.Content.Type == GameTileContentType.SpawnPoint)
+        if(spawnPoint.ContentType == GameTileContentType.SpawnPoint)
         {
+            //Debug.Log("wszystko super");
             Enemy enemy = _enemyFactory.Get();
             enemy.SpawnOn(spawnPoint);
             _enemyCollection.Add(enemy);

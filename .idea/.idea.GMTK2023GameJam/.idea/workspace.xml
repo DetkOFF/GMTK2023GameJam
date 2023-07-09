@@ -13,6 +13,8 @@
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemy.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameBoard.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameBoard.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameTile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameTile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Tower.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Tower.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Setup/EnemyFactory.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Setup/EnemyFactory.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -44,7 +46,7 @@
       <updated>1688751758540</updated>
       <workItem from="1688751768074" duration="5377000" />
       <workItem from="1688895251223" duration="1049000" />
-      <workItem from="1688904245106" duration="3772000" />
+      <workItem from="1688904245106" duration="8476000" />
     </task>
     <servers />
   </component>

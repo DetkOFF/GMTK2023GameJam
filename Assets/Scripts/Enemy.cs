@@ -29,7 +29,7 @@ public class Enemy : MonoBehaviour
     {
         
         transform.localPosition = tile.transform.localPosition;
-        Debug.Log(transform.localPosition);
+        //Debug.Log(transform.localPosition);
         _tileFrom = tile;
         _tileTo = tile.NextTileOnPath;
         _positionFrom = _tileFrom.transform.localPosition;
@@ -63,11 +63,11 @@ public class Enemy : MonoBehaviour
         //Vector3 direction = _tileTo.ExitPoint - transform.position;
         //transform.Translate(direction.normalized*Time.deltaTime*_speed); //*speed
         
-        Debug.Log("Tile from: " + _tileFrom);
+        /*Debug.Log("Tile from: " + _tileFrom);
         Debug.Log("Tile to: " + _tileTo);
         Debug.Log("Position from: " + _positionFrom);
         Debug.Log("Position to:" + _positionTo);
-        Debug.Log("Enemy Position: " + transform.localPosition);
+        Debug.Log("Enemy Position: " + transform.localPosition);*/
         return true;
     }
 }

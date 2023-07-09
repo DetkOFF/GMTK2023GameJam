@@ -40,11 +40,11 @@ public class Tower : GameTileContent
 
     private void Shoot()
     {
-        if (readyToShoot)
+        if (readyToShoot && (Vector2.Distance(transform.position, _target.Position) < (_targetingRange + _target.ColliederSize)))
         {
             readyToShoot = false;
             StartCoroutine(ShootingCoolDownCoroutine());
-            Debug.Log("Shoot");
+            //Debug.Log("Shoot");
             //_target.Enemy.GetDamage(_shootingDamage);
             _shootingLineEffect.positionCount = 2;
             Vector3[] linePoses = new Vector3[2];
@@ -71,13 +71,13 @@ public class Tower : GameTileContent
     private bool isAcquireTarget()
     {
         //Collider[] targets = Physics.OverlapSphere(transform.localPosition, _targetingRange,ENEMY_LAYER_MASK);
-        Collider2D[] targets = Physics2D.OverlapCircleAll(transform.localPosition, _targetingRange, ENEMY_LAYER_MASK);
+        Collider2D[] targets = Physics2D.OverlapCircleAll(transform.position, _targetingRange, ENEMY_LAYER_MASK);
         if (targets.Length > 0)
         {
             foreach (var trgt in targets)
             {
                 _target = trgt.GetComponent<TargetPoint>();
-                if(!TargetBehindWall())
+                if(!TargetBehindWall() || (Vector2.Distance(transform.position, trgt.transform.position) > _targetingRange + _target.ColliederSize))
                     break;
             }
 
