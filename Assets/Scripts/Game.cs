@@ -27,10 +27,20 @@ public class Game : MonoBehaviour
     private CashManager _cashManager;
     private Ray TouchRay => _camera.ScreenPointToRay(Input.mousePosition);
 
+
+    public bool LoadLevel = false; 
     private void Start()
     {
-        _board.Initialize(_boardSize,_contentFactory);
-        _cashManager = new CashManager(_startingBalance);
+        if (LoadLevel)
+        {
+            _board.LoadLevel(_boardSize,_contentFactory);
+        }
+        else
+        {
+            _board.Initialize(_boardSize,_contentFactory);
+        }
+        _cashManager = new CashManager(_startingBalance);    
+
     }
     private void Update()
     {
@@ -52,7 +62,9 @@ public class Game : MonoBehaviour
     private void SpawnEnemy()
     {
         GameTile spawnPoint = _board.GetTile(TouchRay);
-        if(spawnPoint.Content.Type == GameTileContentType.SpawnPoint)
+        //Debug.Log(spawnPoint);
+        //if(spawnPoint.Content.Type == GameTileContentType.SpawnPoint)
+        if(spawnPoint.ContentType == GameTileContentType.SpawnPoint)
         {
             if(_cashManager.GetBalance() >= 0)
             {

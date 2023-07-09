@@ -6,9 +6,9 @@ using UnityEngine;
 public class GameTile : MonoBehaviour
 {
     [SerializeField] private Transform _arrow;
-    private GameTile _north, _south, _west, _east, _nextOnPath;
+    [SerializeField] private GameTile _north, _south, _west, _east, _nextOnPath;
 
-    private int _distance;
+    [SerializeField] private int _distance;
     public bool HasPath => _distance != int.MaxValue;
     public bool IsAlternative { get; set; }
 
@@ -18,11 +18,12 @@ public class GameTile : MonoBehaviour
     private Quaternion _westRotation = Quaternion.Euler(0, 0, 90);
 
     public GameTileContent _content;
+    public GameTileContentType ContentType;
 
     public GameTile NextTileOnPath => _nextOnPath;
 
-    public Vector3 ExitPoint { get; private set; }
-
+    //public Vector3 ExitPoint { get; private set; }
+    public Vector3 ExitPoint;
     public GameTileContent Content
     {
         get => _content;
@@ -34,6 +35,7 @@ public class GameTile : MonoBehaviour
             }
             _content = value;
             _content.transform.localPosition = transform.localPosition;
+            ContentType = _content.Type;
         }
     }
     
