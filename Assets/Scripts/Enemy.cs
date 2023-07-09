@@ -20,7 +20,7 @@ public class Enemy : MonoBehaviour
         _tileFrom = tile;
         _tileTo = tile.NextTileOnPath;
         _positionFrom = _tileFrom.transform.localPosition;
-        _positionTo = _tileTo.transform.localPosition;
+        _positionTo = _tileTo.ExitPoint;
         _progress = 0f;
     }
 
@@ -37,12 +37,12 @@ public class Enemy : MonoBehaviour
                 return false;
             }
             _positionFrom = _positionTo;
-            _positionTo = _tileTo.transform.localPosition;
+            _positionTo = _tileTo.ExitPoint;
             _progress -= 1f;
         }
         //transform.localPosition += Vector3.LerpUnclamped(_positionFrom, _positionTo, _progress);
         
-        Vector3 direction = _tileTo.transform.localPosition - transform.position;
+        Vector3 direction = _tileTo.ExitPoint - transform.position;
         transform.Translate(direction.normalized*Time.deltaTime); //*speed
         
         Debug.Log("Tile from: " + _tileFrom);
