@@ -5304,10 +5304,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _boardSize: {x: 19, y: 7}
   _board: {fileID: 347651868}
+  _startingBalance: 0
   _camera: {fileID: 519420031}
   _contentFactory: {fileID: 11400000, guid: 3ac31593dac1a3d4f9445257253e6102, type: 2}
   _enemyFactory: {fileID: 11400000, guid: 042785dac658f6b4bbf0c7e2ed32e399, type: 2}
   _spawnSpeed: 0
+  scoreTxt: {fileID: 0}
+  enemiesToWin: 5
+  nextScene: 
   LoadLevel: 1
 --- !u!4 &497872995
 Transform:
@@ -5830,7 +5834,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 5.625
+  orthographic size: 7.03125
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -13849,11 +13853,11 @@ RectTransform:
   m_Father: {fileID: 865510709}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 106, y: 145}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 50, y: 50}
   m_SizeDelta: {x: 100, y: 112.5}
-  m_Pivot: {x: 0, y: 0.5}
+  m_Pivot: {x: 0, y: 0}
 --- !u!114 &1208928744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14868,7 +14872,7 @@ RectTransform:
   m_GameObject: {fileID: 1271827410}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 865510709}

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Game : MonoBehaviour
 {
@@ -22,7 +24,12 @@ public class Game : MonoBehaviour
 
     private float _spawnProgress = 0;
 
+    [SerializeField] private TextMeshProUGUI scoreTxt;
+
     private  EnemyCollection _enemyCollection = new EnemyCollection();
+
+    [SerializeField] int enemiesToWin = 5;
+    [SerializeField] private string nextScene;
 
     private CashManager _cashManager;
     private Ray TouchRay => _camera.ScreenPointToRay(Input.mousePosition);
@@ -61,6 +68,15 @@ public class Game : MonoBehaviour
 
         _enemyCollection.GameUpdate();  
         _board.GameUpdate();
+
+        Debug.Log(_enemyCollection._passedAmmount);
+
+        scoreTxt.text = (enemiesToWin - _enemyCollection._passedAmmount).ToString();
+        
+        if (_enemyCollection._passedAmmount >= enemiesToWin)
+        {
+            SceneManager.LoadScene(nextScene);
+        }
         //_cashManager.ShowBalance();
     }
     private void SpawnEnemy()

@@ -18,10 +18,11 @@ public class EnemyCollection
         {
             if(!_enemies[i].GameUpdate())
             {
-                int lastIndex = _enemies.Count - 1;
-                _enemies[i] = _enemies[lastIndex];
+                //int lastIndex = _enemies.Count - 1;
+                //_enemies[i] = _enemies[lastIndex];
                 EnemyPassed(i);
-                _enemies.RemoveAt(lastIndex);
+                //_enemies.RemoveAt(lastIndex);
+                _enemies.RemoveAt(i);
                 i -= 1;
             }
         }

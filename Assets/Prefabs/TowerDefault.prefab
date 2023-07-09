@@ -219,8 +219,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 4
   _targetingRange: 3.03
-  _shootingCooldown: 1
-  _shootingDamage: 1
+  _shootingCooldown: 0.6
+  _shootingDamage: 2
   _shootingLineEffect: {fileID: 5884991790215576933}
   _targetingZone: {fileID: 528983406569214384}
 --- !u!61 &6488512262769685651
