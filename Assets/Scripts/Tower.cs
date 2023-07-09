@@ -45,7 +45,7 @@ public class Tower : GameTileContent
             readyToShoot = false;
             StartCoroutine(ShootingCoolDownCoroutine());
             Debug.Log("Shoot");
-            //_target.Enemy.GetDamage(_shootingDamage);
+            _target.Enemy.ApplyDamage(_shootingDamage);
             _shootingLineEffect.positionCount = 2;
             Vector3[] linePoses = new Vector3[2];
             linePoses[0] = transform.position;
@@ -110,7 +110,7 @@ public class Tower : GameTileContent
 
         Vector2 myPos = transform.localPosition;
         Vector2 targetPos = _target.Position;
-        if (Vector2.Distance(myPos, targetPos) > _targetingRange + _target.ColliederSize || TargetBehindWall())
+        if (Vector2.Distance(myPos, targetPos) > _targetingRange + _target.ColliderSize || TargetBehindWall())
         {
             _target = null;
             return false;

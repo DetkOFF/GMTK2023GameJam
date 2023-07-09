@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class TargetPoint : MonoBehaviour
 {
-    //public Enemy Enemy { get; private set; }
+    public Enemy Enemy { get; private set; }
     public Vector3 Position => transform.position;
-    public float ColliederSize { get; private set; }
+    public float ColliderSize { get; private set; }
 
     private void Awake()
     {
-        //Enemy = transform.root.GetComponent<Enemy>();
-        ColliederSize = GetComponent<CircleCollider2D>().radius * transform.localScale.x;
+        Enemy = transform.root.GetComponent<Enemy>();
+        ColliderSize = GetComponent<CircleCollider2D>().radius * transform.localScale.x;
     }
 }

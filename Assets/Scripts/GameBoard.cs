@@ -140,7 +140,7 @@ public class GameBoard : MonoBehaviour
             tile.Content = _contentFactory.Get(GameTileContentType.Destination);
             FindPaths();
         }
-
+        FindPaths();
     }
     public void ToggleSpawnPoint(GameTile tile)
     {

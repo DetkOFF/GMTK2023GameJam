@@ -7,6 +7,7 @@ public class Game : MonoBehaviour
     [SerializeField] private Vector2Int _boardSize;
     [SerializeField] private GameBoard _board;
 
+    [SerializeField] private float _startingBalance;
 
     [SerializeField]
     private Camera _camera;
@@ -22,11 +23,14 @@ public class Game : MonoBehaviour
     private float _spawnProgress = 0;
 
     private  EnemyCollection _enemyCollection = new EnemyCollection();
+
+    private CashManager _cashManager;
     private Ray TouchRay => _camera.ScreenPointToRay(Input.mousePosition);
 
     private void Start()
     {
         _board.Initialize(_boardSize,_contentFactory);
+        _cashManager = new CashManager(_startingBalance);
     }
     private void Update()
     {
@@ -39,16 +43,28 @@ public class Game : MonoBehaviour
             HandleAlternativeTouch();
         }
         _enemyCollection.GameUpdate();  
+
         _board.GameUpdate();
+
+        _cashManager.ShowBalance();
+
     }
     private void SpawnEnemy()
     {
         GameTile spawnPoint = _board.GetTile(TouchRay);
         if(spawnPoint.Content.Type == GameTileContentType.SpawnPoint)
         {
-            Enemy enemy = _enemyFactory.Get();
-            enemy.SpawnOn(spawnPoint);
-            _enemyCollection.Add(enemy);
+            if(_cashManager.GetBalance() >= 0)
+            {
+                Enemy enemy = _enemyFactory.Get((EnemyType)Random.Range(0, 3));
+                _cashManager.RemoveFromBalance(enemy.GetEnemyPrice());
+                enemy.SpawnOn(spawnPoint);
+                _enemyCollection.Add(enemy);
+            }
+            else
+            {
+                Debug.Log("Game failed");
+            }
         }
         //enemies.GameUpdate();
         //_board.GameUpdate();

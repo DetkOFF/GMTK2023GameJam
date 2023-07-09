@@ -13,11 +13,14 @@ public class Enemy : MonoBehaviour
     private float _progress;
     private float _health;
     private float _speed;
+    private float _price;
+    public Action OnEnemyPassed;
 
-    public void Initialize(float health, float speed)
+    public void Initialize(float health, float speed, float price)
     {
         _health = health;
         _speed = speed;
+        _price = price;
     }
     public void ApplyDamage(float damage)
     {
@@ -51,6 +54,7 @@ public class Enemy : MonoBehaviour
             _tileTo = _tileTo.NextTileOnPath;
             if(_tileTo == null)
             {
+                OnEnemyPassed?.Invoke();
                 OriginFactory.Reclaim(this);
                 return false;
             }
@@ -62,12 +66,11 @@ public class Enemy : MonoBehaviour
         
         //Vector3 direction = _tileTo.ExitPoint - transform.position;
         //transform.Translate(direction.normalized*Time.deltaTime*_speed); //*speed
-        
-        Debug.Log("Tile from: " + _tileFrom);
-        Debug.Log("Tile to: " + _tileTo);
-        Debug.Log("Position from: " + _positionFrom);
-        Debug.Log("Position to:" + _positionTo);
-        Debug.Log("Enemy Position: " + transform.localPosition);
         return true;
     }
+    public float GetEnemyPrice()
+    {
+        return _price;
+    }
+    
 }
