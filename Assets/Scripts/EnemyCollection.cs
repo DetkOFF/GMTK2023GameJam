@@ -26,7 +26,7 @@ public class EnemyCollection
                 i -= 1;
             }
         }
-        DisplayPassedEnemies();
+        //DisplayPassedEnemies();
     }
     private void EnemyPassed(int index)
     {
@@ -35,10 +35,10 @@ public class EnemyCollection
             _passedAmmount++;
         }
     }
-    private void DisplayPassedEnemies()
+    /*private void DisplayPassedEnemies()
     {
         Debug.Log(_passedAmmount);
-    }
+    }*/
 
    
     

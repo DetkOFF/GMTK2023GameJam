@@ -90,7 +90,7 @@ public class Game : MonoBehaviour
             {
                 Enemy enemy = _enemyFactory.Get((EnemyType)Random.Range(0, 3));
                 _cashManager.RemoveFromBalance(enemy.GetEnemyPrice());
-                enemy.SpawnOn(spawnPoint);
+                //enemy.SpawnOn(spawnPoint);
                 _enemyCollection.Add(enemy);
             }
             else

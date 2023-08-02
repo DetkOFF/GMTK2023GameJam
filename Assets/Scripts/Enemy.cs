@@ -8,7 +8,8 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public EnemyFactory OriginFactory { get; set; }
-    private GameTile _tileFrom, _tileTo;
+    //private GameTile _tileFrom, _tileTo;
+    private RoadTile tileFrom, tileTo;
     private Vector3 _positionFrom, _positionTo;
     private float _progress;
     private float _health;
@@ -33,7 +34,7 @@ public class Enemy : MonoBehaviour
         _health -= damage;
     }
 
-    public void SpawnOn(GameTile tile)
+    /*public void SpawnOn(GameTile tile)
     {
         
         transform.localPosition = tile.transform.localPosition;
@@ -42,6 +43,18 @@ public class Enemy : MonoBehaviour
         _tileTo = tile.NextTileOnPath;
         _positionFrom = _tileFrom.transform.localPosition;
         _positionTo = _tileTo.ExitPoint;
+        _progress = 0f;
+    }*/
+    
+    public void SpawnOn(RoadTile tile)
+    {
+        
+        transform.localPosition = tile.transform.localPosition;
+        //Debug.Log(transform.localPosition);
+        tileFrom = tile;
+        tileTo = tile.NextTile;
+        _positionFrom = tileFrom.transform.localPosition;
+        _positionTo = tileTo.transform.localPosition;
         _progress = 0f;
     }
 
@@ -55,7 +68,7 @@ public class Enemy : MonoBehaviour
         _progress += Time.deltaTime * _speed;
         while(_progress >=  1)
         {
-            _tileFrom = _tileTo;
+            /*_tileFrom = _tileTo;
             _tileTo = _tileTo.NextTileOnPath;
             if(_tileTo == null)
             {
@@ -67,6 +80,20 @@ public class Enemy : MonoBehaviour
             }
             _positionFrom = _positionTo;
             _positionTo = _tileTo.ExitPoint;
+            _progress -= 1f;*/
+            
+            
+            tileFrom = tileTo;
+            tileTo = tileTo.NextTile;
+            if(tileTo == null)
+            {
+                OnEnemyPassed?.Invoke();
+                _passed = true;
+                OriginFactory.Reclaim(this);
+                return false;
+            }
+            _positionFrom = _positionTo;
+            _positionTo = tileTo.transform.localPosition;
             _progress -= 1f;
         }
         transform.localPosition = Vector3.LerpUnclamped(_positionFrom, _positionTo, _progress);
